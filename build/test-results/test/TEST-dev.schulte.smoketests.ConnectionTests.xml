@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.schulte.smoketests.ConnectionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-26T06:27:04" hostname="DESKTOP-87938HV" time="0.663">
+  <properties/>
+  <testcase name="connection_available()" classname="dev.schulte.smoketests.ConnectionTests" time="0.663"/>
+  <system-out><![CDATA[org.postgresql.jdbc.PgConnection@a43ce46
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
