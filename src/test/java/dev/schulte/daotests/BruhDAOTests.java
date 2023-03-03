@@ -5,6 +5,8 @@ import dev.schulte.daos.BruhDAOPostgres;
 import dev.schulte.entities.Bruh;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BruhDAOTests {
 
@@ -23,5 +25,20 @@ public class BruhDAOTests {
     void get_bruh_by_id_test(){
         Bruh bruh = bruhDAO.getBruhByUserId("321691547529904138");
         Assertions.assertEquals(1000000, bruh.getBruhMoment());
+    }
+
+    @Test
+    @Order(3)
+    void get_all_bruhs_test(){
+        List<Bruh> bruhList = bruhDAO.getAllBruhs();
+        Assertions.assertNotEquals(0, bruhList.size());
+    }
+
+    @Test
+    @Order(4)
+    void update_bruh_test(){
+        Bruh bruh1 = new Bruh("321691547529904138", 1500000, 1);
+        Bruh updatedBruh = bruhDAO.updateBruh(bruh1);
+        Assertions.assertEquals(1500000, updatedBruh.getBruhMoment());
     }
 }

@@ -4,6 +4,7 @@ import dev.schulte.entities.Bruh;
 import dev.schulte.util.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BruhDAOPostgres implements BruhDAO{
@@ -56,11 +57,42 @@ public class BruhDAOPostgres implements BruhDAO{
 
     @Override
     public List<Bruh> getAllBruhs() {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "select * from bruh";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            List<Bruh> bruhList = new ArrayList<>();
+            while(rs.next()){
+                Bruh bruh = new Bruh();
+                bruh.setUserId(rs.getString("user_code"));
+                bruh.setBruhMoment(rs.getLong("bruh_moment"));
+                bruh.setTime(rs.getLong("time"));
+                bruhList.add(bruh);
+            }
+            return bruhList;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public Bruh updateBruh(Bruh bruh) {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "update bruh set bruh_moment = ?, time = ? where user_code = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            preparedStatement.setLong(1, bruh.getBruhMoment());
+            preparedStatement.setLong(2, bruh.getTime());
+            preparedStatement.setString(3, bruh.getUserId());
+
+            preparedStatement.executeUpdate();
+            return bruh;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
