@@ -11,15 +11,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BotListeners extends ListenerAdapter {
 
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-
-        if(!event.getAuthor().isBot()){
-            String messageSent = event.getMessage().getContentRaw();
-            event.getChannel().sendMessage("This was sent: " + messageSent).queue();
-        }
-
-    }
+//    @Override
+//    public void onMessageReceived(MessageReceivedEvent event) {
+//
+//        if(!event.getAuthor().isBot()){
+//            String messageSent = event.getMessage().getContentRaw();
+//            event.getChannel().sendMessage("This was sent: " + messageSent).queue();
+//        }
+//
+//    }
 
     @Override
     public void onChannelDelete(ChannelDeleteEvent event) {

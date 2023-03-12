@@ -47,6 +47,8 @@ public class DiscordBot extends ListenerAdapter {
                             new OptionData(OptionType.INTEGER, "operand2", "the second number", true)
                                     .setRequiredRange(1, Integer.MAX_VALUE))
                     .queue();
+            guild.upsertCommand("bruh", "Experience any number of bruh moments")
+                    .queue();
         }
 
 //        CommandListUpdateAction commands = jda.updateCommands();

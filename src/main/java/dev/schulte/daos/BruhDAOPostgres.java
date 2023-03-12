@@ -41,12 +41,17 @@ public class BruhDAOPostgres implements BruhDAO{
             preparedStatement.setString(1, userId);
 
             ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
 
             Bruh bruh = new Bruh();
-            bruh.setUserId(rs.getString("user_code"));
-            bruh.setBruhMoment(rs.getLong("bruh_moment"));
-            bruh.setTime(rs.getLong("time"));
+
+            while(rs.next()) {
+                String code = rs.getString("user_code");
+                bruh.setUserId(code);
+                long moment = rs.getLong("bruh_moment");
+                bruh.setBruhMoment(moment);
+                long time = rs.getLong("time");
+                bruh.setTime(time);
+            }
 
             return bruh;
         }catch (SQLException e){
