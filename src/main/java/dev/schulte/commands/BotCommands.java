@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Random;
@@ -44,19 +45,31 @@ public class BotCommands extends ListenerAdapter {
                     long current = Instant.now().getEpochSecond();
                     long elapsed = current - time;
 
-                    if(elapsed < 14400){
+                    if(elapsed < 14400L){
 
-                        Date d = new Date(elapsed);
+                        Duration duration = Duration.ofSeconds(14400L-elapsed);
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("h 'hours,' mm 'minutes and' ss 'seconds.'");
+                        String formatted = String.format("%dhrs %02dmins", duration.toHours(), duration.toMinutesPart());
 
-                        event.reply("You must wait " + sdf.format(d)).queue();
+                        event.reply("You gotta wait " + formatted + ".").queue();
+
+                    }else{
+
+                        long bruhMoments = randomBruhGenerator();
+
+                        bruh.setBruhMoment(bruhMoments + bruh.getBruhMoment());
+
+                        bruh.setTime(current);
+
+                        bruhDAO.updateBruh(bruh);
+
+                        event.reply("You just experienced " + bruhMoments + " bruh moments.").queue();
                     }
                 }
 
             }else{
 
-                event.reply("That can't be used here.").queue();
+                event.reply("That can't be used here, you silly goose.").queue();
             }
 
 
