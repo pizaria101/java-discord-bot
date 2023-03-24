@@ -25,7 +25,6 @@ public class BotListeners extends ListenerAdapter {
     public void onChannelDelete(ChannelDeleteEvent event) {
 
         String channelName = event.getChannel().getName();
-
         TextChannel general = event.getGuild().getTextChannelById(1047256709950865440L);
 
         if(general != null){
@@ -37,7 +36,6 @@ public class BotListeners extends ListenerAdapter {
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
 
         if(!event.getUser().isBot()){
-
             String message = event.getMessageId();
             event.getChannel().addReactionById(message, Emoji.fromUnicode("U+1F1EB")).queue();
         }
